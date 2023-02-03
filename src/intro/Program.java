@@ -4,7 +4,7 @@ public class Program {
 
     public static void main(String[] args) {
 
-        int decimal = asDecimal("11001101");
+        int decimal = asDecimal("11001100");
 
         System.out.println(decimal); // 205
 
