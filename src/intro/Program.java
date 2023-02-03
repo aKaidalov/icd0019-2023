@@ -10,7 +10,7 @@ public class Program {
 
         String str = asString(decimal);
 
-        System.out.print(str);
+        System.out.print(str); // "11001101"
     }
 
     public static String asString(int input) {
