@@ -14,7 +14,18 @@ public class Program {
     }
 
     public static int asDecimal(String input) {
+        // 11001101
+        input = reverse(input);
+        for (int i = 0; i < input.length(); i++) {
+
+        }
+
         return 0;
+    }
+
+    private static String reverse(String input) {
+        String reversed = "";
+        return "";
     }
 
     private static int pow(int arg, int power) {
