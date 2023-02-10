@@ -22,19 +22,21 @@ public class Code {
         System.out.println(asString(numbers1));
         System.out.println(asString(numbers2));
 
+        System.out.println(mode("abccbc")); // c
+
+        System.out.println(squareDigits("a9b2")); // a81b4
     }
 
     public static int sum(int[] numbers) {
         int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
+        for (int number : numbers) {
+            sum += number;
         }
         return sum;
     }
 
     public static double average(int[] numbers) {
-        double average = Double.valueOf(sum(numbers)) / numbers.length;
-        return average;
+        return Double.valueOf(sum(numbers)) / numbers.length;
     }
 
     public static Integer minimumElement(int[] integers) {
@@ -42,9 +44,9 @@ public class Code {
             return null;
         }
         int minValue = integers[0];
-        for (int i = 0; i < integers.length; i++) {
-            if (integers[i] < minValue){
-                minValue = integers[i];
+        for (int integer : integers) {
+            if (integer < minValue) {
+                minValue = integer;
             }
         }
         return minValue;
@@ -59,7 +61,7 @@ public class Code {
             if (i == 0){
                 result += String.valueOf(elements[i]);
             } else {
-                result += ", " + String.valueOf(elements[i]);
+                result += (", " + elements[i]);
             }
         }
         return result;
@@ -68,12 +70,41 @@ public class Code {
     public static Character mode(String input) {
         if (input == null) {
             return null;
+        } else {
+            Character ch = null;
+            int chCount = 0;
+            for (int i = 0; i < input.length(); i++) {
+                int count = 0;
+                for (int j = 0; j < input.length(); j++) {
+                    if (input.charAt(j) == input.charAt(i)){
+                        count++;
+                    }
+                }
+                if (count > chCount){
+                    ch = input.charAt(i);
+                    chCount = count;
+                }
+            }
+            return ch;
         }
-        return null;
     }
 
     public static String squareDigits(String s) {
-        return "";
+        if (s.length() == 0){
+            return s;
+        }
+        char[] separatedString = s.toCharArray();
+        String result = "";
+        for (char character : separatedString){
+            if (Character.isDigit(character)){
+                int newInt = Integer.parseInt(String.valueOf(character));
+                int sqrt = newInt * newInt;
+                result += sqrt;
+            } else {
+                result += character;
+            }
+        }
+        return result;
     }
 
     public static int isolatedSquareCount() {
