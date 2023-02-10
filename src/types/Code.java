@@ -7,28 +7,68 @@ public class Code {
 
     public static void main(String[] args) {
 
-        int[] numbers = {1, 3, -2, 9};
+        int[] numbers1 = {1, 3, -2, 9};
+        int[] numbers2 = {1, 2, 3};
 
-        System.out.println(sum(numbers)); // 11
+        System.out.println(sum(numbers1)); // 11
+        System.out.println(sum(numbers2));
+
+        System.out.println(average(numbers1)); // 2.75
+        System.out.println(average(numbers2));
+
+        System.out.println(minimumElement(numbers1)); // -2
+        System.out.println(minimumElement(numbers2));
+
+        System.out.println(asString(numbers1));
+        System.out.println(asString(numbers2));
+
     }
 
     public static int sum(int[] numbers) {
-        return 0;
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+        }
+        return sum;
     }
 
     public static double average(int[] numbers) {
-        return 0.0;
+        double average = Double.valueOf(sum(numbers)) / numbers.length;
+        return average;
     }
 
     public static Integer minimumElement(int[] integers) {
-        return null;
+        if (integers.length == 0){
+            return null;
+        }
+        int minValue = integers[0];
+        for (int i = 0; i < integers.length; i++) {
+            if (integers[i] < minValue){
+                minValue = integers[i];
+            }
+        }
+        return minValue;
     }
 
     public static String asString(int[] elements) {
-        return "";
+        if (elements.length == 0){
+            return "";
+        }
+        String result = "";
+        for (int i = 0; i < elements.length; i++) {
+            if (i == 0){
+                result += String.valueOf(elements[i]);
+            } else {
+                result += ", " + String.valueOf(elements[i]);
+            }
+        }
+        return result;
     }
 
     public static Character mode(String input) {
+        if (input == null) {
+            return null;
+        }
         return null;
     }
 

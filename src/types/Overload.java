@@ -3,7 +3,9 @@ package types;
 public class Overload {
 
     public static void main(String[] args) {
-
+        add(2L, 3L);
+        add(1, 4);
+        add("5", "5");
     }
 
     public static long add(long x, long y) {
