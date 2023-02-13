@@ -25,6 +25,8 @@ public class Code {
         System.out.println(mode("abccbc")); // c
 
         System.out.println(squareDigits("a9b2")); // a81b4
+
+        System.out.println(isolatedSquareCount());
     }
 
     public static int sum(int[] numbers) {
@@ -115,7 +117,62 @@ public class Code {
         int isolatedCount = 0;
 
         // count isolates squares here
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                int counter = 0;
+                if (i - 1 < 0 || j - 1 < 0){    // if a cell is out of matrix
+                    counter++;
+                } else if (!matrix[i - 1][j - 1]) { // if a cell is in matrix
+                    counter++;
+                }
 
+                if (i - 1 < 0){
+                    counter++;
+                } else if (!matrix[i - 1][j]) {
+                    counter++;
+                }
+
+                if (i - 1 < 0 || j + 1 > 9){
+                    counter++;
+                } else if (!matrix[i - 1][j + 1]) {
+                    counter++;
+                }
+
+                if (j + 1 > 9){
+                    counter++;
+                } else if (!matrix[i][j + 1]) {
+                    counter++;
+                }
+
+                if (i + 1 > 9 || j + 1 > 9){
+                    counter++;
+                } else if (!matrix[i + 1][j + 1]) {
+                    counter++;
+                }
+
+                if (i + 1 > 9){
+                    counter++;
+                } else if (!matrix[i + 1][j]) {
+                    counter++;
+                }
+
+                if (i + 1 > 9 || j - 1 < 0){
+                    counter++;
+                } else if (!matrix[i + 1][j - 1]) {
+                    counter++;
+                }
+
+                if (j - 1 < 0){
+                    counter++;
+                } else if (!matrix[i][j - 1]) {
+                    counter++;
+                }
+
+                if (counter == 8) {
+                    isolatedCount++;
+                }
+            }
+        }
         return isolatedCount;
     }
 
