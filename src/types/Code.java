@@ -38,7 +38,7 @@ public class Code {
     }
 
     public static double average(int[] numbers) {
-        double doubleSum = (sum(numbers));
+        double doubleSum = sum(numbers);
         return doubleSum / numbers.length;
     }
 
