@@ -63,7 +63,7 @@ public class Code {
             if (i == 0){
                 result += String.valueOf(elements[i]);
             } else {
-                result += (", " + elements[i]);
+                result += ", " + elements[i];
             }
         }
         return result;
@@ -119,54 +119,17 @@ public class Code {
         // count isolates squares here
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
+                // was inspired by this: https://www.geeksforgeeks.org/find-safe-cells-in-a-matrix/
                 int counter = 0;
-                if (i - 1 < 0 || j - 1 < 0){    // if a cell is out of matrix
-                    counter++;
-                } else if (!matrix[i - 1][j - 1]) { // if a cell is in matrix
-                    counter++;
-                }
 
-                if (i - 1 < 0){
-                    counter++;
-                } else if (!matrix[i - 1][j]) {
-                    counter++;
-                }
-
-                if (i - 1 < 0 || j + 1 > 9){
-                    counter++;
-                } else if (!matrix[i - 1][j + 1]) {
-                    counter++;
-                }
-
-                if (j + 1 > 9){
-                    counter++;
-                } else if (!matrix[i][j + 1]) {
-                    counter++;
-                }
-
-                if (i + 1 > 9 || j + 1 > 9){
-                    counter++;
-                } else if (!matrix[i + 1][j + 1]) {
-                    counter++;
-                }
-
-                if (i + 1 > 9){
-                    counter++;
-                } else if (!matrix[i + 1][j]) {
-                    counter++;
-                }
-
-                if (i + 1 > 9 || j - 1 < 0){
-                    counter++;
-                } else if (!matrix[i + 1][j - 1]) {
-                    counter++;
-                }
-
-                if (j - 1 < 0){
-                    counter++;
-                } else if (!matrix[i][j - 1]) {
-                    counter++;
-                }
+                counter += checkCell(i - 1, j - 1, matrix);
+                counter += checkCell(i - 1, j, matrix);
+                counter += checkCell(i - 1, j + 1, matrix);
+                counter += checkCell(i, j + 1, matrix);
+                counter += checkCell(i + 1, j + 1, matrix);
+                counter += checkCell(i + 1, j, matrix);
+                counter += checkCell(i + 1, j - 1, matrix);
+                counter += checkCell(i, j - 1, matrix);
 
                 if (counter == 8) {
                     isolatedCount++;
@@ -174,6 +137,15 @@ public class Code {
             }
         }
         return isolatedCount;
+    }
+
+    public static int checkCell (int i, int j, boolean[][] matrix){ // return 0 or 1
+        if (i < 0 || j < 0 || i > 9 || j > 9){
+            return 1;   // if a cell is out of matrix
+        } else if (!matrix[i][j]) {
+            return 1;   // if a cell is in matrix
+        }
+        return 0;
     }
 
     private static void printMatrix(boolean[][] matrix) {
@@ -194,4 +166,71 @@ public class Code {
 
         return matrix;
     }
-}
+
+    /*
+    public static int isolatedSquareCount() {
+    boolean[][] matrix = getSampleMatrix();
+
+    printMatrix(matrix);
+
+    int isolatedCount = 0;
+
+    // count isolates squares here
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[0].length; j++) {
+            int counter = 0;
+            if (i - 1 < 0 || j - 1 < 0){    // if a cell is out of matrix
+                counter++;
+            } else if (!matrix[i - 1][j - 1]) { // if a cell is in matrix
+                counter++;
+            }
+
+            if (i - 1 < 0){
+                counter++;
+            } else if (!matrix[i - 1][j]) {
+                counter++;
+            }
+
+            if (i - 1 < 0 || j + 1 > 9){
+                counter++;
+            } else if (!matrix[i - 1][j + 1]) {
+                counter++;
+            }
+
+            if (j + 1 > 9){
+                counter++;
+            } else if (!matrix[i][j + 1]) {
+                counter++;
+            }
+
+            if (i + 1 > 9 || j + 1 > 9){
+                counter++;
+            } else if (!matrix[i + 1][j + 1]) {
+                counter++;
+            }
+
+            if (i + 1 > 9){
+                counter++;
+            } else if (!matrix[i + 1][j]) {
+                counter++;
+            }
+
+            if (i + 1 > 9 || j - 1 < 0){
+                counter++;
+            } else if (!matrix[i + 1][j - 1]) {
+                counter++;
+            }
+
+            if (j - 1 < 0){
+                counter++;
+            } else if (!matrix[i][j - 1]) {
+                counter++;
+            }
+
+            if (counter == 8) {
+                isolatedCount++;
+            }
+        }
+        return isolatedCount;
+    }
+     */
