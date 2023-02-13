@@ -42,7 +42,7 @@ public class Code {
     }
 
     public static Integer minimumElement(int[] integers) {
-        if (integers.length == 0){
+        if (integers.length == 0) {
             return null;
         }
         int minValue = integers[0];
@@ -55,12 +55,12 @@ public class Code {
     }
 
     public static String asString(int[] elements) {
-        if (elements.length == 0){
+        if (elements.length == 0) {
             return "";
         }
         String result = "";
         for (int i = 0; i < elements.length; i++) {
-            if (i == 0){
+            if (i == 0) {
                 result += String.valueOf(elements[i]);
             } else {
                 result += ", " + elements[i];
@@ -78,11 +78,11 @@ public class Code {
             for (int i = 0; i < input.length(); i++) {
                 int count = 0;
                 for (int j = 0; j < input.length(); j++) {
-                    if (input.charAt(j) == input.charAt(i)){
+                    if (input.charAt(j) == input.charAt(i)) {
                         count++;
                     }
                 }
-                if (count > chCount){
+                if (count > chCount) {
                     ch = input.charAt(i);
                     chCount = count;
                 }
@@ -92,13 +92,13 @@ public class Code {
     }
 
     public static String squareDigits(String s) {
-        if (s.length() == 0){
+        if (s.length() == 0) {
             return s;
         }
         char[] separatedString = s.toCharArray();
         String result = "";
-        for (char character : separatedString){
-            if (Character.isDigit(character)){
+        for (char character : separatedString) {
+            if (Character.isDigit(character)) {
                 int newInt = Integer.parseInt(String.valueOf(character));
                 int sqrt = newInt * newInt;
                 result += sqrt;
@@ -139,8 +139,8 @@ public class Code {
         return isolatedCount;
     }
 
-    public static int checkCell (int i, int j, boolean[][] matrix){ // return 0 or 1
-        if (i < 0 || j < 0 || i > 9 || j > 9){
+    public static int checkCell(int i, int j, boolean[][] matrix) { // return 0 or 1
+        if (i < 0 || j < 0 || i > 9 || j > 9) {
             return 1;   // if a cell is out of matrix
         } else if (!matrix[i][j]) {
             return 1;   // if a cell is in matrix
@@ -163,10 +163,8 @@ public class Code {
                 matrix[i][j] = r.nextInt(5) < 2;
             }
         }
-
         return matrix;
     }
-
     /*
     public static int isolatedSquareCount() {
     boolean[][] matrix = getSampleMatrix();
@@ -234,3 +232,4 @@ public class Code {
         return isolatedCount;
     }
      */
+}
