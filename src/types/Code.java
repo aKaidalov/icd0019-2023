@@ -38,7 +38,8 @@ public class Code {
     }
 
     public static double average(int[] numbers) {
-        return Double.valueOf(sum(numbers)) / numbers.length;
+        double doubleSum = (sum(numbers));
+        return doubleSum / numbers.length;
     }
 
     public static Integer minimumElement(int[] integers) {
@@ -231,6 +232,5 @@ public class Code {
         }
         return isolatedCount;
     }
-    
      */
 }
