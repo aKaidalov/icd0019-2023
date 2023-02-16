@@ -3,7 +3,7 @@ package junit;
 public class Code {
 
     public static boolean isSpecial(int candidate) {
-        return false;
+        return candidate % 11 <= 3;
     }
 
     public static int longestStreak(String inputString) {
@@ -11,11 +11,30 @@ public class Code {
     }
 
     public static Character mode(String inputString) {
-        return null;
+        if (inputString == null) {
+            return null;
+        } else {
+            Character ch = null;
+            int chCount = 0;
+            for (int i = 0; i < inputString.length(); i++) {
+                int count = getCharacterCount(inputString, inputString.charAt(i));
+                if (count > chCount) {
+                    ch = inputString.charAt(i);
+                    chCount = count;
+                }
+            }
+            return ch;
+        }
     }
 
     public static int getCharacterCount(String allCharacters, char targetCharacter) {
-        return 0;
+        int counter = 0;
+        for (int i = 0; i < allCharacters.length(); i++) {
+            if (targetCharacter == allCharacters.charAt(i)){
+                counter++;
+            }
+        }
+        return counter;
     }
 
     public static int[] removeDuplicates(int[] integers) {
