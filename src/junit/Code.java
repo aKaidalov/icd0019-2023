@@ -9,12 +9,11 @@ public class Code {
     }
 
     public static int longestStreak(String inputString) {
-        int maxCount = 0;
-        int counter = 1;
-
         if (inputString.length() == 1){
             return 1;
         }
+        int maxCount = 0;
+        int counter = 1;
         for (int i = 0; i < inputString.length() - 1; i++) {
             if (inputString.charAt(i) == inputString.charAt(i + 1)) {
                 counter++;
@@ -83,16 +82,16 @@ public class Code {
 
     public static int[] filterArray(int[] arr, int duplicate){
         int counter = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == duplicate){
+        for (int a1 : arr) {
+            if (a1 == duplicate) {
                 counter++;
             }
         }
         int[] newArr = new int[arr.length - counter];
         int j = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] != duplicate){
-                newArr[j] = arr[i];
+        for (int a2 : arr) {
+            if (a2 != duplicate) {
+                newArr[j] = a2;
                 j++;
             }
         }
@@ -110,11 +109,11 @@ public class Code {
         return sum;
     }
 
-    public static void main(String[] args) {
-        System.out.println(longestStreak("aaaabvvvvv"));
-        // longestStreak("aaaabvvvvv");
-        int[] a = new int[] {1, 2, 1, 3, 2};
-        removeDuplicates(a);
-    }
+//    public static void main(String[] args) {
+//        System.out.println(longestStreak("aaaabvvvvv"));
+//        // longestStreak("aaaabvvvvv");
+//        int[] a = new int[] {1, 2, 1, 3, 2};
+//        removeDuplicates(a);
+//    }
 
 }
