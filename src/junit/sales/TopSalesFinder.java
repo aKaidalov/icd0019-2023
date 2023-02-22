@@ -47,30 +47,68 @@ public class TopSalesFinder {
     }
 
     // ---------------------------------------------------------------------------
+
+//    public void getUniqueProducts() {
+//        // System.out.println(Arrays.toString(productsArr));
+//        for (int i = 0; i < productsArr.length; i++) {
+//            if (productsArr[i] != null){
+//                String id = productsArr[i].getProductId();
+//                int sold = productsArr[i].getItemsSold();
+//                int price = productsArr[i].getProductPrice() * sold;    // become an overall price (not for a unit)
+//                if (i < productsArr.length - 1){             // if loop reaches the last element, and it's not null
+//                    for (int j = i + 1; j < productsArr.length; j++) {               // than it's a unique element.
+//                        if (productsArr[j] != null) {
+//                            String s1 = productsArr[i].getProductId();
+//                            String s2 = productsArr[j].getProductId();
+//                            if (s1.equals(s2)) {
+//                                price += productsArr[j].getProductPrice() * productsArr[j].getItemsSold();
+//                                sold += productsArr[j].getItemsSold();
+//                                productsArr[j] = null;
+//                            }
+//                        }
+//                    }
+//                }
+//                SalesRecord sr = new SalesRecord(id,price,sold);
+//                addToRemovedDuplicateProducts(sr);
+//            }
+//        }
+//    }
+
+    // ---------------------------------------------------------------------------
+
     public void getUniqueProducts() {
-//        System.out.println(Arrays.toString(productsArr));
+        // System.out.println(Arrays.toString(productsArr));
         for (int i = 0; i < productsArr.length; i++) {
             if (productsArr[i] != null){
                 String id = productsArr[i].getProductId();
                 int sold = productsArr[i].getItemsSold();
                 int price = productsArr[i].getProductPrice() * sold;    // become an overall price (not for a unit)
-                if (i < productsArr.length - 1){             // if loop reaches the last element, and it's not null
-                    for (int j = i + 1; j < productsArr.length; j++) {               // than it's a unique element.
-                        if (productsArr[j] != null) {
-                            String s1 = productsArr[i].getProductId();
-                            String s2 = productsArr[j].getProductId();
-                            if (s1.equals(s2)) {
-                                price += productsArr[j].getProductPrice() * productsArr[j].getItemsSold();
-                                sold += productsArr[j].getItemsSold();
-                                productsArr[j] = null;
-                            }
-                        }
-                    }
+                if (i < productsArr.length - 1){ // if loop reaches the last element, and it's not null than it's a unique element.
+                    Integer[] res = findProductsWithSameId(i);
+                    price += res[0];
+                    sold += res[1];
                 }
                 SalesRecord sr = new SalesRecord(id,price,sold);
                 addToRemovedDuplicateProducts(sr);
             }
         }
+    }
+
+    public Integer[] findProductsWithSameId(int i) {
+        int price = 0;
+        int sold = 0;
+        for (int j = i + 1; j < productsArr.length; j++) {
+            if (productsArr[j] != null) {
+                String s1 = productsArr[i].getProductId();
+                String s2 = productsArr[j].getProductId();
+                if (s1.equals(s2)) {
+                    price += productsArr[j].getProductPrice() * productsArr[j].getItemsSold();
+                    sold += productsArr[j].getItemsSold();
+                    productsArr[j] = null;
+                }
+            }
+        }
+        return new Integer[] {price, sold};
     }
 
     public void addToRemovedDuplicateProducts(SalesRecord record) {
