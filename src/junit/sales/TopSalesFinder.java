@@ -54,10 +54,12 @@ public class TopSalesFinder {
                 String id = productsArr[i].getProductId();
                 int sold = productsArr[i].getItemsSold();
                 int price = productsArr[i].getProductPrice() * sold;    // become an overall price (not for a unit)
-                if (i < productsArr.length - 1){    // if loop reaches the last element, and it's not null
-                    for (int j = i + 1; j < productsArr.length; j++) {      // than it's a unique element.
+                if (i < productsArr.length - 1){             // if loop reaches the last element, and it's not null
+                    for (int j = i + 1; j < productsArr.length; j++) {               // than it's a unique element.
                         if (productsArr[j] != null) {
-                            if (productsArr[i].getProductId().equals(productsArr[j].getProductId())) {
+                            String s1 = productsArr[i].getProductId();
+                            String s2 = productsArr[j].getProductId();
+                            if (s1.equals(s2)) {
                                 price += productsArr[j].getProductPrice() * productsArr[j].getItemsSold();
                                 sold += productsArr[j].getItemsSold();
                                 productsArr[j] = null;
