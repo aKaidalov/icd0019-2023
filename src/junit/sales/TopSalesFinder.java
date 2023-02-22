@@ -1,7 +1,5 @@
 package junit.sales;
 
-import java.util.Arrays;
-
 public class TopSalesFinder {
 
     private SalesRecord[] productsArr = new SalesRecord[0];
@@ -39,10 +37,6 @@ public class TopSalesFinder {
             }
         }
         productsArr = new SalesRecord[0];
-        System.out.println("list start");
-        System.out.println(Arrays.toString(uniqueProducts));
-        System.out.println("list end");
-        System.out.println(Arrays.toString(result));
         return result;
     }
 
@@ -153,8 +147,6 @@ public class TopSalesFinder {
         tsf.registerSale(new SalesRecord("p2", 43, 1));
 
         tsf.findItemsSoldOver(100);
-
-        System.out.println(Arrays.toString(tsf.findItemsSoldOver(100)));
     }
 }
 
