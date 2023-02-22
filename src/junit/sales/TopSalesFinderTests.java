@@ -38,6 +38,7 @@ public class TopSalesFinderTests {
         TopSalesFinder tsf = new TopSalesFinder();
         for (SalesRecord record : generateRecords(10, 10)) {
             tsf.registerSale(record);
+            System.out.println(record);
         }
 
         assertThat(tsf.findItemsSoldOver(100),
@@ -49,6 +50,7 @@ public class TopSalesFinderTests {
         TopSalesFinder tsf = new TopSalesFinder();
         for (SalesRecord record : generateRecords(100, 20)) {
             tsf.registerSale(record);
+            System.out.println(record);
         }
 
         assertThat("There should be 19 items that sold over 100",
