@@ -69,7 +69,8 @@ public class PointSetTests {
         assertThat(getSet(), is(getSet()));
 
         assertThat(getSet(new Point(1, 1)), is(not(getSet())));
-
+        getSet(new Point(1, 1));
+        System.out.println(getSet(new Point(1, 2)));
         assertThat(getSet(new Point(1, 1)),
                 is(not(getSet(new Point(1, 2)))));
 
