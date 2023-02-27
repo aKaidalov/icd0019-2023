@@ -10,6 +10,7 @@ public class Runner {
         Timer timer = new Timer();
 
         for (int i = 0; i < 1E9; i++) {
+            continue;
         }
 
         System.out.println(timer.getPassedTime());

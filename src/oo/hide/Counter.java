@@ -4,7 +4,7 @@ public class Counter {
 
     private int start;
     private int step;
-    static boolean firstAttempt = true;
+//    static boolean firstAttempt = true;
 
     public Counter(int start, int step) {
         this.start = start;
