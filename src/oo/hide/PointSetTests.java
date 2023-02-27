@@ -70,9 +70,37 @@ public class PointSetTests {
 
         assertThat(getSet(new Point(1, 1)), is(not(getSet())));
         getSet(new Point(1, 1));
-        System.out.println(getSet(new Point(1, 2)));
+
+//        System.out.println(getSet(new Point(1, 2)));
+
         assertThat(getSet(new Point(1, 1)),
                 is(not(getSet(new Point(1, 2)))));
+
+//        PointSet c = getSet(new Point(1, 1));
+//        PointSet d = getSet(new Point(1, 2));
+//        if (c != d) {
+//            System.out.println("Danja loh");
+//        }
+
+//        PointSet a = new PointSet();
+//        a.add(new Point(1, 1));
+//        a.add(new Point(1, 2));
+//        System.out.println(a.getIndex());
+//        System.out.println(a);
+//        System.out.println(a.getArrLength());
+//
+//        PointSet b = new PointSet();
+//        b.add(new Point(1, 2));
+//        b.add(new Point(1, 1));
+//        System.out.println(b.getIndex());
+//        System.out.println(b);
+//        System.out.println(b.getArrLength());
+//
+//        if (a.equals(b)) {
+//            System.out.println("Danja ne loh");
+//        } else {
+//            System.out.println("Danja loh");
+//        }
 
         assertThat(getSet(new Point(1, 1), new Point(1, 2)),
                 is(getSet(new Point(1, 2), new Point(1, 1))));
