@@ -11,6 +11,8 @@ public class PointSetExtraTests extends PointSetTests {
     public void nullIsAValidElement() {
         PointSet set = new PointSet();
 
+        // If get null, then create a new Point class object with (-1000, 1000) parameters.
+        // In PointSet class repr finds this object and returns null instead.
 
         set.add(new Point(1, 1));
         set.add(null);

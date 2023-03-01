@@ -3,7 +3,7 @@ package oo.hide;
 public class PointSet {
 
     private Point[] arr;
-    private int index = 0;
+    private Integer index = 0;
 
     public int getArrLength() {
         return arr.length;
@@ -26,14 +26,18 @@ public class PointSet {
     @Override
     public String toString() {
         String repr = "";
+        Point check = new Point(-1000, 1000);
         if (arr[0] == null) {
             return repr;
         }
         for (Point p : arr) {
             if (p == null) {
                 break;
+            } else if (p.equals(check)) {
+                repr += "null, ";
+            } else {
+                repr += String.format("%s, ", p);
             }
-            repr += String.format("%s, ", p);
         }
         return repr.substring(0, repr.length() - 2);
     }
@@ -59,7 +63,10 @@ public class PointSet {
         if (index + 1 > arr.length) {
             this.arr = returnExtendedArrCopy();
         }
-        if (arr[0] == null || !contains(point)) {
+        if (point == null) {
+            arr[index] = new Point(-1000, 1000);
+            index++;
+        } else if (arr[0] == null || !contains(point)) {
             arr[index] = point;
             index++;
         }
@@ -92,7 +99,7 @@ public class PointSet {
         return false;
     }
 
-    // subtract---------------------------------------------------------------------------
+    // subtract-------------------------------------------------------------------
 
     public PointSet subtract(PointSet other) {
         Point[] subtractArr = new Point[0];
@@ -106,7 +113,7 @@ public class PointSet {
         return returnArrCopy(subtractArr);
     }
 
-    // intersect---------------------------------------------------------------------------
+    // intersect------------------------------------------------------------------
 
     public PointSet intersect(PointSet other) {
         Point[] intersectionArr = new Point[0];
@@ -120,7 +127,7 @@ public class PointSet {
         return returnArrCopy(intersectionArr);
     }
 
-    // intersect---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
 
     public Point[] addToAnyArr(Point obj, Point[] newArr) {
 
@@ -149,5 +156,26 @@ public class PointSet {
     // ---------------------------------------------------------------------------
 
     public void remove(Point point) {
+        Point[] newPointArr = new Point[0];
+        for (Point p : arr) {
+            if (p == null) {
+                break;
+            }
+            if (!(p.equals(point))) {
+                newPointArr = addToAnyArr(p, newPointArr);
+            }
+        }
+        setNewArrValues(newPointArr);
+    }
+
+    public void setNewArrValues(Point[] newPointArr) {
+        int l = getArrLength();
+        for (int i = 0; i < l; i++) {
+            if (i < newPointArr.length){
+                arr[i] = newPointArr[i];
+            } else {
+                arr[i] = null;
+            }
+        }
     }
 }
