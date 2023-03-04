@@ -15,4 +15,13 @@ public class MinimumElementTests {
         assertThat(MinimumElement.minimumElement(new int[] { 1, 0 }), is(0));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void handlesEmptyArray() {
+        MinimumElement.minimumElement(new int[] {});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void handlesNullPointer() {
+        MinimumElement.minimumElement(null);
+    }
 }

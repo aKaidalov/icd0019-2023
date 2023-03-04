@@ -2,6 +2,15 @@ package exceptions.basic;
 
 public class TryCatchSample {
     public String readDataFrom(Resource resource) {
-        throw new RuntimeException("not implemented yet");
+        String data;
+        try {
+            resource.open();
+            data = resource.read();
+            return data;
+        } catch (Exception e) {
+            return "someDefaultValue";
+        } finally {
+            resource.close();
+        }
     }
 }
