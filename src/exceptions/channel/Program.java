@@ -1,5 +1,7 @@
 package exceptions.channel;
 
+import java.io.IOException;
+
 public class Program {
 
     ConstantProvider provider = new ConstantProvider();
@@ -8,14 +10,27 @@ public class Program {
 
         Program program = new Program();
 
-//        program.provider.makeItThrowMissingConstantException();
+        program.provider.makeItThrowMissingConstantException();
 //        program.provider.makeItThrowCorruptConfigurationException();
 
         program.main(7); // 7 is arbitrary value
     }
 
     public void main(int input) {
-        double result = calculate(input);
+        double result;
+
+        try {
+            result = calculate(input);
+        } catch (IOException e) {
+            present(formatError(e.getMessage()));
+            return;
+        } catch (MissingConstantException e) {
+            present(formatError("Constant is missing"));
+            return;
+        } catch (CorruptConfigurationException e) {
+            present(formatError("Configuration file is corrupt"));
+            return;
+        }
 
         String formatted = format(String.valueOf(result));
 
@@ -23,11 +38,11 @@ public class Program {
 
     }
 
-    private double calculate(int input) {
+    private double calculate(int input) throws IOException {
         // an arbitrary calculation that uses some
         // data from external source
 
-        return (input + 42) * provider.getMultiplier();
+        return (input + 42) * provider.getMultiplier2();
     }
 
     private String format(String data) {
