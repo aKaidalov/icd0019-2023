@@ -10,8 +10,8 @@ public class Program {
 
         Program program = new Program();
 
-        program.provider.makeItThrowMissingConstantException();
-//        program.provider.makeItThrowCorruptConfigurationException();
+//        program.provider.makeItThrowMissingConstantException();
+        program.provider.makeItThrowCorruptConfigurationException();
 
         program.main(7); // 7 is arbitrary value
     }
@@ -21,14 +21,14 @@ public class Program {
 
         try {
             result = calculate(input);
-        } catch (IOException e) {
-            present(formatError(e.getMessage()));
-            return;
         } catch (MissingConstantException e) {
             present(formatError("Constant is missing"));
             return;
         } catch (CorruptConfigurationException e) {
             present(formatError("Configuration file is corrupt"));
+            return;
+        } catch (IOException e) {
+            present(formatError(e.getMessage()));
             return;
         }
 
@@ -42,7 +42,7 @@ public class Program {
         // an arbitrary calculation that uses some
         // data from external source
 
-        return (input + 42) * provider.getMultiplier2();
+        return (input + 42) * provider.getMultiplier();
     }
 
     private String format(String data) {
