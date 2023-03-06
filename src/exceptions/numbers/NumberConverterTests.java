@@ -41,6 +41,12 @@ public class NumberConverterTests {
         assertThat(converter.numberInWords(13), is("thirteen"));
 
         assertThat(converter.numberInWords(123), is("one hundred twenty-three"));
+
+        assertThat(converter.numberInWords(12), is("twelve"));
+        assertThat(converter.numberInWords(56), is("fifty-six"));
+        assertThat(converter.numberInWords(77), is("seventy-seven"));
+        assertThat(converter.numberInWords(100), is("one hundred"));
+        assertThat(converter.numberInWords(118), is("one hundred eighteen"));
     }
 
     @Test

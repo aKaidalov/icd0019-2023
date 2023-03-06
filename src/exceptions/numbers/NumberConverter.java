@@ -10,33 +10,39 @@ public class NumberConverter {
 
     private String language;
     private Properties properties;
+    private String result;
 
 
     // init
     public NumberConverter(String lang) {
         this.language = lang;
         this.properties = readProperties();
+        this.result = "";
     }
 
     public String numberInWords(Integer number) {
-        String result = "";
 
         if (checkKeyFromInt(number)) {
             return getValueFromIntKey(number);
         } else {
-            if (10 < number && number < 20) {
-                String ones = getValueFromIntKey(number % 10);
-                return ones + getValueFromStrKey("teen");
-            } else if (number < 100 && checkKeyFromStr("tens-after-delimiter")){
-
-            } else if (number == 100){
-                return getValueFromStrKey("hundred");
-            }else if (100 < number && number < 1000){
-
+            if (100 <= number && number <= 999) {
+               number = getHundredsAndReturnNewNumber(number);
             }
-
+            if (20 <= number && number <= 99) {
+                number = getTensAndReturnNewNumber(number);
+            }
+            if (11 <= number && number <= 19) {
+                number = getTeenAndReturnNewNumber(number);
+            }
+            if (0 <= number && number <= 10) {
+                number = getNumberFromProperties(number);
+            }
+            if (number != 0){
+                throw new RuntimeException("Something was calculated wrong...");
+            }
         }
-        return null;
+        String numberInString = result;
+        return numberInString;
     }
 
     // Properties ---------------------------------------------------------
@@ -91,5 +97,48 @@ public class NumberConverter {
     }
     public String getValueFromStrKey(String strKey) {
         return properties.getProperty(String.valueOf(strKey));
+    }
+
+    public Integer getHundredsAndReturnNewNumber(Integer number){
+        int hundreds = number / 100;
+        String hundredsInStr = getValueFromIntKey(hundreds) + getValueFromStrKey("hundreds-before-delimiter") + getValueFromStrKey("hundred") + getValueFromStrKey("hundreds-after-delimiter");
+        result += hundredsInStr;
+        number -= hundreds * 100;
+
+        return number;
+    }
+    public Integer getTensAndReturnNewNumber(Integer number){
+        int tens = number / 10;
+        int fullTens = tens * 10;
+
+        if (checkKeyFromInt(fullTens)) {
+            result += getValueFromIntKey(fullTens);
+        } else {
+            String tensInStr = getValueFromIntKey(tens) + getValueFromStrKey("tens-suffix");
+            result += tensInStr;
+        }
+        number -= fullTens;
+        result += getValueFromStrKey("tens-after-delimiter");
+
+        return number;
+    }
+    public Integer getTeenAndReturnNewNumber(Integer number){
+        if (checkKeyFromInt(number)) {
+            number = getNumberFromProperties(number);
+        } else {
+            int ones = number % 10;
+            String teenInStr = getValueFromIntKey(ones) + getValueFromStrKey("teen");
+            result += teenInStr;
+            number -= ones - 10;
+        }
+
+        return number;
+    }
+
+    public Integer getNumberFromProperties(Integer number){
+        result += getValueFromIntKey(number);
+        number -= number;
+
+        return number;
     }
 }
