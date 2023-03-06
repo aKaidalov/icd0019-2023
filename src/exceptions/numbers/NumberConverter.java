@@ -21,27 +21,32 @@ public class NumberConverter {
     }
 
     public String numberInWords(Integer number) {
+        int checkNumber = number;
 
-        if (checkKeyFromInt(number)) {
-            return getValueFromIntKey(number);
+        if (checkKeyFromInt(checkNumber)) {
+            return getValueFromIntKey(checkNumber);
         } else {
-            if (100 <= number && number <= 999) {
-               number = getHundredsAndReturnNewNumber(number);
+            if (checkNumber == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
+                checkNumber = getNumberFromProperties(checkNumber);
             }
-            if (20 <= number && number <= 99) {
-                number = getTensAndReturnNewNumber(number);
+            if (100 <= checkNumber && checkNumber <= 999) {
+                checkNumber = getHundredsAndReturnNewNumber(checkNumber);
             }
-            if (11 <= number && number <= 19) {
-                number = getTeenAndReturnNewNumber(number);
+            if (20 <= checkNumber && checkNumber <= 99) {
+                checkNumber = getTensAndReturnNewNumber(checkNumber);
             }
-            if (0 <= number && number <= 10) {
-                number = getNumberFromProperties(number);
+            if (11 <= checkNumber && checkNumber <= 19) {
+                checkNumber = getTeenAndReturnNewNumber(checkNumber);
             }
-            if (number != 0){
+            if (0 < checkNumber && checkNumber <= 10) {
+                checkNumber = getNumberFromProperties(checkNumber);
+            }
+            if (checkNumber != 0){
                 throw new RuntimeException("Something was calculated wrong...");
             }
         }
         String numberInString = result;
+        result = "";    // mozno sdelat' bez etogo?
         return numberInString;
     }
 
@@ -101,9 +106,14 @@ public class NumberConverter {
 
     public Integer getHundredsAndReturnNewNumber(Integer number){
         int hundreds = number / 100;
-        String hundredsInStr = getValueFromIntKey(hundreds) + getValueFromStrKey("hundreds-before-delimiter") + getValueFromStrKey("hundred") + getValueFromStrKey("hundreds-after-delimiter");
-        result += hundredsInStr;
         number -= hundreds * 100;
+        String hundredsInStr;
+        if (number != 0) {
+            hundredsInStr = getValueFromIntKey(hundreds) + getValueFromStrKey("hundreds-before-delimiter") + getValueFromStrKey("hundred") + getValueFromStrKey("hundreds-after-delimiter");
+        } else {
+            hundredsInStr = getValueFromIntKey(hundreds) + getValueFromStrKey("hundreds-before-delimiter") + getValueFromStrKey("hundred");
+        }
+        result += hundredsInStr;
 
         return number;
     }
