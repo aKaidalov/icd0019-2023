@@ -6,7 +6,7 @@ public class ConfigurationLoaderTests {
 
     @Test
     public void exceptionTranslationExample() throws Exception {
-        String configPath = "./";
+        String configPath = "./hello";
 
         new ConfigurationLoader().loadConfiguration(configPath);
     }

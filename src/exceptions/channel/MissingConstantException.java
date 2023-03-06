@@ -2,8 +2,8 @@ package exceptions.channel;
 
 public class MissingConstantException extends RuntimeException {
 
-    //    public MissingConstantException(String errorMessage) {
-//        super(errorMessage);
+    //    public MissingConstantException(String errorMessage) { -> eto init
+//        super(errorMessage);  -> errorMessage == "kakoi-to String"
 //    }
 //    -> Mozno bilo b6 eto propisat' i togda v klasse ConstantProvider
 //

@@ -7,7 +7,7 @@ import java.io.IOException;
 public class DirectoryListPrinterTests {
 
     @Test
-    public void readingThrowsExample() throws IOException {
+    public void readingThrowsExample() {
         new DirectoryListPrinter().printDirectoryList();
     }
 
