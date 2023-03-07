@@ -1,6 +1,7 @@
 package exceptions.numbers;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -39,7 +40,11 @@ public class NumberConverter {
                 checkNumber = getTeenAndReturnNewNumber(checkNumber);
             }
             if (0 < checkNumber && checkNumber <= 10) {
-                checkNumber = getNumberFromProperties(checkNumber);
+                if (checkKeyFromInt(checkNumber)) {
+                    checkNumber = getNumberFromProperties(checkNumber);
+                } else {
+                    throw new MissingTranslationException("" + checkNumber);
+                }
             }
 //            System.out.println(number);
 //            System.out.println(checkNumber);
@@ -66,8 +71,11 @@ public class NumberConverter {
                     is, StandardCharsets.UTF_8);
 
             properties.load(reader);
+        } catch (FileNotFoundException e) {
+            throw new MissingLanguageFileException(language, e);
+        } catch (IllegalArgumentException e) {
+            throw new BrokenLanguageFileException(language, e);
         } catch (IOException e) {
-            // handle exceptions
             System.out.println("Error reading file:" + e.getMessage());
             e.printStackTrace();
         } finally {
@@ -130,7 +138,9 @@ public class NumberConverter {
             result += tensInStr;
         }
         number -= fullTens;
-        result += getValueFromStrKey("tens-after-delimiter");
+        if (number != 0) {
+            result += getValueFromStrKey("tens-after-delimiter");
+        }
 
         return number;
     }

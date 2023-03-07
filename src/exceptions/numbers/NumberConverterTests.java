@@ -48,6 +48,8 @@ public class NumberConverterTests {
         assertThat(converter.numberInWords(100), is("one hundred"));
         assertThat(converter.numberInWords(118), is("one hundred eighteen"));
         assertThat(converter.numberInWords(126), is("one hundred twenty-six"));
+
+        assertThat(converter.numberInWords(60), is("sixty"));
     }
 
     @Test
