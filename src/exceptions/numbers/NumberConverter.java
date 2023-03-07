@@ -25,19 +25,8 @@ public class NumberConverter {
         if (checkKeyFromInt(number)) {
             return getValueFromIntKey(number);
         } else {
-            if (number == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
-                number = getNumberFromProperties(number);
-            }
-            if (100 <= number && number <= 999) {
-                number = getHundredsAndReturnNewNumber(number);
-            }
-            if (20 <= number && number <= 99) {
-                number = getTensAndReturnNewNumber(number);
-            }
-            if (11 <= number && number <= 19) {
-                number = getTeenAndReturnNewNumber(number);
-            }
-            check(number);
+            number = theFirstCheck(number);
+            theLastCheck(number);
         }
 
         return returnNumberInString();
@@ -82,7 +71,7 @@ public class NumberConverter {
         } catch (IOException ignore) {}
     }
 
-    // getters ---------------------------------------------------------
+    // Getters ---------------------------------------------------------
 
     public boolean checkKeyFromInt(Integer intKey) {
         return properties.containsKey(String.valueOf(intKey));
@@ -141,21 +130,38 @@ public class NumberConverter {
         return number;
     }
 
-    // ---------------------------------------------------------
-
     public Integer getNumberFromProperties(Integer number){
         result += getValueFromIntKey(number);
         number -= number;
 
         return number;
     }
+
     public String returnNumberInString(){
         String numberInString = result;
         result = "";
         return numberInString;
     }
 
-    public void check(Integer number) {
+    // Main part ---------------------------------------------------------
+
+    public Integer theFirstCheck(Integer number) {
+        if (number == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
+            number = getNumberFromProperties(number);
+        }
+        if (100 <= number && number <= 999) {
+            number = getHundredsAndReturnNewNumber(number);
+        }
+        if (20 <= number && number <= 99) {
+            number = getTensAndReturnNewNumber(number);
+        }
+        if (11 <= number && number <= 19) {
+            number = getTeenAndReturnNewNumber(number);
+        }
+        return number;
+    }
+
+    public void theLastCheck(Integer number) {
         if (0 < number && number <= 10) {
             if (checkKeyFromInt(number)) {
                 number = getNumberFromProperties(number);
