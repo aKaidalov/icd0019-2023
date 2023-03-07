@@ -1,7 +1,6 @@
 package exceptions.numbers;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -22,35 +21,11 @@ public class NumberConverter {
     }
 
     public String numberInWords(Integer number) {
-        int checkNumber = number;
 
-        if (checkKeyFromInt(checkNumber)) {
-            return getValueFromIntKey(checkNumber);
+        if (checkKeyFromInt(number)) {
+            return getValueFromIntKey(number);
         } else {
-            if (checkNumber == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
-                checkNumber = getNumberFromProperties(checkNumber);
-            }
-            if (100 <= checkNumber && checkNumber <= 999) {
-                checkNumber = getHundredsAndReturnNewNumber(checkNumber);
-            }
-            if (20 <= checkNumber && checkNumber <= 99) {
-                checkNumber = getTensAndReturnNewNumber(checkNumber);
-            }
-            if (11 <= checkNumber && checkNumber <= 19) {
-                checkNumber = getTeenAndReturnNewNumber(checkNumber);
-            }
-            if (0 < checkNumber && checkNumber <= 10) {
-                if (checkKeyFromInt(checkNumber)) {
-                    checkNumber = getNumberFromProperties(checkNumber);
-                } else {
-                    throw new MissingTranslationException("" + checkNumber);
-                }
-            }
-//            System.out.println(number);
-//            System.out.println(checkNumber);
-            if (checkNumber != 0){
-                throw new RuntimeException("Something was calculated wrong...");
-            }
+            check(number);
         }
 
         return returnNumberInString();
@@ -71,13 +46,10 @@ public class NumberConverter {
                     is, StandardCharsets.UTF_8);
 
             properties.load(reader);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new MissingLanguageFileException(language, e);
         } catch (IllegalArgumentException e) {
             throw new BrokenLanguageFileException(language, e);
-        } catch (IOException e) {
-            System.out.println("Error reading file:" + e.getMessage());
-            e.printStackTrace();
         } finally {
             close(is);
         }
@@ -151,11 +123,13 @@ public class NumberConverter {
             int ones = number % 10;
             String teenInStr = getValueFromIntKey(ones) + getValueFromStrKey("teen");
             result += teenInStr;
-            number -= (ones + 10);
+            number -= ones + 10;
         }
 
         return number;
     }
+
+    // ---------------------------------------------------------
 
     public Integer getNumberFromProperties(Integer number){
         result += getValueFromIntKey(number);
@@ -167,5 +141,30 @@ public class NumberConverter {
         String numberInString = result;
         result = "";
         return numberInString;
+    }
+
+    public void check(Integer number) {
+        if (number == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
+            number = getNumberFromProperties(number);
+        }
+        if (100 <= number && number <= 999) {
+            number = getHundredsAndReturnNewNumber(number);
+        }
+        if (20 <= number && number <= 99) {
+            number = getTensAndReturnNewNumber(number);
+        }
+        if (11 <= number && number <= 19) {
+            number = getTeenAndReturnNewNumber(number);
+        }
+        if (0 < number && number <= 10) {
+            if (checkKeyFromInt(number)) {
+                number = getNumberFromProperties(number);
+            } else {
+                throw new MissingTranslationException("" + number);
+            }
+        }
+        if (number != 0){
+            throw new RuntimeException("Something was calculated wrong...");
+        }
     }
 }
