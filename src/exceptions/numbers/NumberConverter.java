@@ -25,6 +25,18 @@ public class NumberConverter {
         if (checkKeyFromInt(number)) {
             return getValueFromIntKey(number);
         } else {
+            if (number == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
+                number = getNumberFromProperties(number);
+            }
+            if (100 <= number && number <= 999) {
+                number = getHundredsAndReturnNewNumber(number);
+            }
+            if (20 <= number && number <= 99) {
+                number = getTensAndReturnNewNumber(number);
+            }
+            if (11 <= number && number <= 19) {
+                number = getTeenAndReturnNewNumber(number);
+            }
             check(number);
         }
 
@@ -144,18 +156,6 @@ public class NumberConverter {
     }
 
     public void check(Integer number) {
-        if (number == 0) { // if program gets 100 and subtracts 100, then it needs to be stopped
-            number = getNumberFromProperties(number);
-        }
-        if (100 <= number && number <= 999) {
-            number = getHundredsAndReturnNewNumber(number);
-        }
-        if (20 <= number && number <= 99) {
-            number = getTensAndReturnNewNumber(number);
-        }
-        if (11 <= number && number <= 19) {
-            number = getTeenAndReturnNewNumber(number);
-        }
         if (0 < number && number <= 10) {
             if (checkKeyFromInt(number)) {
                 number = getNumberFromProperties(number);
