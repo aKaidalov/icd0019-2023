@@ -47,6 +47,28 @@ public class NumberConverterTests {
         assertThat(converter.numberInWords(77), is("seventy-seven"));
         assertThat(converter.numberInWords(100), is("one hundred"));
         assertThat(converter.numberInWords(118), is("one hundred eighteen"));
+        assertThat(converter.numberInWords(126), is("one hundred twenty-six"));
+    }
+
+    @Test
+    public void canConvertNumbersToEstonian() {
+        NumberConverter converter = new NumberConverter("et");
+
+        assertThat(converter.numberInWords(0), is("null"));
+
+        assertThat(converter.numberInWords(1), is("üks"));
+
+        assertThat(converter.numberInWords(13), is("kolmteist"));
+
+        assertThat(converter.numberInWords(123), is("ükssada kakskümmend kolm"));
+
+        assertThat(converter.numberInWords(12), is("kaksteist"));
+        assertThat(converter.numberInWords(59), is("viiskümmend üheksa"));
+        assertThat(converter.numberInWords(77), is("seitsekümmend seitse"));
+        assertThat(converter.numberInWords(100), is("ükssada"));
+        assertThat(converter.numberInWords(101), is("ükssada üks"));
+        assertThat(converter.numberInWords(118), is("ükssada kaheksateist"));
+        assertThat(converter.numberInWords(126), is("ükssada kakskümmend kuus"));
     }
 
     @Test

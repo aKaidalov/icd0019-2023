@@ -41,13 +41,14 @@ public class NumberConverter {
             if (0 < checkNumber && checkNumber <= 10) {
                 checkNumber = getNumberFromProperties(checkNumber);
             }
+//            System.out.println(number);
+//            System.out.println(checkNumber);
             if (checkNumber != 0){
                 throw new RuntimeException("Something was calculated wrong...");
             }
         }
-        String numberInString = result;
-        result = "";    // mozno sdelat' bez etogo?
-        return numberInString;
+
+        return returnNumberInString();
     }
 
     // Properties ---------------------------------------------------------
@@ -75,6 +76,7 @@ public class NumberConverter {
 
 //        System.out.println(properties.containsKey(String.valueOf(14)));
 //        System.out.println(properties.getProperty(String.valueOf(14)));
+
         return properties;
     }
 
@@ -139,7 +141,7 @@ public class NumberConverter {
             int ones = number % 10;
             String teenInStr = getValueFromIntKey(ones) + getValueFromStrKey("teen");
             result += teenInStr;
-            number -= ones - 10;
+            number -= (ones + 10);
         }
 
         return number;
@@ -150,5 +152,10 @@ public class NumberConverter {
         number -= number;
 
         return number;
+    }
+    public String returnNumberInString(){
+        String numberInString = result;
+        result = "";
+        return numberInString;
     }
 }
