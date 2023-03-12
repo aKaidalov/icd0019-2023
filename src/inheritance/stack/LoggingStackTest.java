@@ -25,7 +25,7 @@ public class LoggingStackTest {
     public void canAddMultipleElementsAtOnce() {
         LoggingStack stack = new LoggingStack();
 
-        // stack.pushAll(1, 2, 3);
+         stack.pushAll(1, 2, 3);
 
         assertThat(stack.size(), is(3));
         assertThat(stack.pop(), is(3));

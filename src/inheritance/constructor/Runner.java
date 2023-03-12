@@ -18,6 +18,10 @@ public class Runner {
     public void constructBlackBird() {
         new Bird("black");
     }
+    @Test
+    public void constructRaven() {
+        new Raven();
+    }
 
 }
 
