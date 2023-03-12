@@ -2,18 +2,28 @@ package inheritance.analyser;
 
 import java.util.List;
 
-public class TaxFreeSalesAnalyser {
+public final class TaxFreeSalesAnalyser extends AbstractSalesAnalyser {
 
     public TaxFreeSalesAnalyser(List<SalesRecord> records) {
-        throw new RuntimeException("not implemented yet");
+        super(records);
     }
 
     public Double getTotalSales() {
-        throw new RuntimeException("not implemented yet");
+        Double totalSales = 0.0;
+        for (SalesRecord record : records) {
+            totalSales += (record.getItemsSold() * record.getProductPrice());
+        }
+        return totalSales;
     }
 
     public Double getTotalSalesByProductId(String id) {
-        throw new RuntimeException("not implemented yet");
+        Double totalSales = 0.0;
+        for (SalesRecord record : records) {
+            String currentProductId = record.getProductId();
+            if (currentProductId.equals(id))
+                totalSales += (record.getItemsSold() * record.getProductPrice());
+        }
+        return totalSales;
     }
 
     public String getIdOfMostPopularItem() {
