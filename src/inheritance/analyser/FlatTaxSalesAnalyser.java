@@ -12,7 +12,7 @@ public final class FlatTaxSalesAnalyser extends AbstractSalesAnalyser {
     protected Double getTotalSales() {
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
-            totalSales += (record.getItemsSold() * record.getProductPrice() / 1.2);
+            totalSales += record.getItemsSold() * record.getProductPrice() / 1.2;
         }
         return totalSales;
     }
@@ -24,7 +24,7 @@ public final class FlatTaxSalesAnalyser extends AbstractSalesAnalyser {
         for (SalesRecord record : records) {
             String currentProductId = record.getProductId();
             if (currentProductId.equals(id))
-                totalSales += (record.getItemsSold() * record.getProductPrice() / tx);
+                totalSales += record.getItemsSold() * record.getProductPrice() / tx;
         }
         return totalSales;
     }

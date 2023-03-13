@@ -20,42 +20,12 @@ public sealed abstract class AbstractSalesAnalyser
         return REDUCED_TAX_RATE;
     }
 
-    protected Double getTotalSales() {
-        double totalSales = 0.0;
-        for (SalesRecord record : records) {
-            int sold = record.getItemsSold();
-            int price = record.getProductPrice();
-            if (record.hasReducedRate()){
-                totalSales += (sold * price / REDUCED_TAX_RATE);
-            }else {
-                totalSales += (sold * price / TAX_RATE);
-            }
-        }
 
-        return totalSales;
-    }
+    protected abstract Double getTotalSales();
 
-    protected Double getTotalSalesByProductId(String id) {
-        double rtx = getRedusedTaxRate();
-        double tx = getTaxRate();
-        double totalSales = 0.0;
-        for (SalesRecord record : records) {
-            String currentProductId = record.getProductId();
-            if (currentProductId.equals(id)) {
-                int sold = record.getItemsSold();
-                int price = record.getProductPrice();
-                if (record.hasReducedRate()) {
-                    totalSales += (sold * price / rtx);
-                } else {
-                    totalSales += (sold * price / tx);
-                }
-            }
-        }
+    protected abstract Double getTotalSalesByProductId(String id);
 
-        return totalSales;
-    }
-
-    public String getIdOfMostPopularItem() {
+    protected String getIdOfMostPopularItem() {
         String result = "";
         int maxItemsSold = 0;
         int len = records.size();
@@ -77,7 +47,7 @@ public sealed abstract class AbstractSalesAnalyser
         return result;
     }
 
-    public String getIdOfItemWithLargestTotalSales() {
+    protected String getIdOfItemWithLargestTotalSales() {
         String result = "";
         Double maxTotalItemsSales = 0.0;
         int len = records.size();

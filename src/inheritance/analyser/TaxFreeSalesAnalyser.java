@@ -12,7 +12,7 @@ public final class TaxFreeSalesAnalyser extends AbstractSalesAnalyser {
     protected Double getTotalSales() {
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
-            totalSales += (record.getItemsSold() * record.getProductPrice());
+            totalSales += record.getItemsSold() * record.getProductPrice();
         }
         return totalSales;
     }
@@ -23,7 +23,7 @@ public final class TaxFreeSalesAnalyser extends AbstractSalesAnalyser {
         for (SalesRecord record : records) {
             String currentProductId = record.getProductId();
             if (currentProductId.equals(id))
-                totalSales += (record.getItemsSold() * record.getProductPrice());
+                totalSales += record.getItemsSold() * record.getProductPrice();
         }
         return totalSales;
     }
