@@ -8,7 +8,8 @@ public final class TaxFreeSalesAnalyser extends AbstractSalesAnalyser {
         super(records);
     }
 
-    public Double getTotalSales() {
+    @Override
+    protected Double getTotalSales() {
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
             totalSales += (record.getItemsSold() * record.getProductPrice());
@@ -16,7 +17,8 @@ public final class TaxFreeSalesAnalyser extends AbstractSalesAnalyser {
         return totalSales;
     }
 
-    public Double getTotalSalesByProductId(String id) {
+    @Override
+    protected Double getTotalSalesByProductId(String id) {
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
             String currentProductId = record.getProductId();
@@ -25,13 +27,4 @@ public final class TaxFreeSalesAnalyser extends AbstractSalesAnalyser {
         }
         return totalSales;
     }
-
-    public String getIdOfMostPopularItem() {
-        throw new RuntimeException("not implemented yet");
-    }
-
-    public String getIdOfItemWithLargestTotalSales() {
-        throw new RuntimeException("not implemented yet");
-    }
-
 }

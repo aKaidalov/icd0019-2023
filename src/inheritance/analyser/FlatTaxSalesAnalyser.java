@@ -8,7 +8,8 @@ public final class FlatTaxSalesAnalyser extends AbstractSalesAnalyser {
         super(records);
     }
 
-    public Double getTotalSales() {
+    @Override
+    protected Double getTotalSales() {
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
             totalSales += (record.getItemsSold() * record.getProductPrice() / 1.2);
@@ -16,7 +17,8 @@ public final class FlatTaxSalesAnalyser extends AbstractSalesAnalyser {
         return totalSales;
     }
 
-    public Double getTotalSalesByProductId(String id) {
+    @Override
+    protected Double getTotalSalesByProductId(String id) {
         double tx = getTaxRate();
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
@@ -26,13 +28,4 @@ public final class FlatTaxSalesAnalyser extends AbstractSalesAnalyser {
         }
         return totalSales;
     }
-
-    public String getIdOfMostPopularItem() {
-        return super.getIdOfMostPopularItem();
-    }
-
-    public String getIdOfItemWithLargestTotalSales() {
-        return super.getIdOfItemWithLargestTotalSales();
-    }
-
 }
