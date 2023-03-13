@@ -23,8 +23,9 @@ public final class FlatTaxSalesAnalyser extends AbstractSalesAnalyser {
         Double totalSales = 0.0;
         for (SalesRecord record : records) {
             String currentProductId = record.getProductId();
-            if (currentProductId.equals(id))
+            if (currentProductId.equals(id)) {
                 totalSales += record.getItemsSold() * record.getProductPrice() / tx;
+            }
         }
         return totalSales;
     }
