@@ -9,6 +9,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class StreakTests {
 
     @Test
+    public void test() {
+        System.out.println(Code.getStreakList("abbctt"));
+    }
+    @Test
     public void findsStreaks() {
 
         assertThat(Code.getStreakList("").toString(), is("[]"));
