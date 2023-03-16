@@ -10,15 +10,34 @@ public class Birthday {
     @Test
     public void runCode() {
 
+        List<Integer> counts = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            counts.add(findFirstCollision());
+        }
+
+        int sum = 0;
+        for (Integer count : counts) {
+            sum += count;
+        }
+
+        System.out.println(sum / counts.size());
+    }
+
+    private static int findFirstCollision() {
         Random r = new Random();
 
-        int randomDayOfYear = r.nextInt(365);
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < 365; i++) {
+            int randomDayOfYear = r.nextInt(365);
 
-        // pick random day in a loop
-        // find how many iterations till first collision (got the same number)
+            if (set.contains(randomDayOfYear)) {
+                return i;
+            } else {
+                set.add(randomDayOfYear);
+            }
+        }
 
-
-
+        throw new IllegalStateException("programming error");
     }
 
 }

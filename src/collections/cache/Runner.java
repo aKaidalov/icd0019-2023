@@ -10,8 +10,9 @@ public class Runner {
         Fibonacci fib = new Fibonacci();
 
         Timer timer = new Timer();
-
-        fib.fib(40);
+        for (int i = 0; i < 41; i++) {
+            System.out.println(fib.fib(i));
+        }
 
         System.out.println(timer.getPassedTime());
     }

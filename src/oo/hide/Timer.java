@@ -6,7 +6,7 @@ public class Timer {
 
     public String getPassedTime() {
         double difference = System.currentTimeMillis() - start;
-        System.out.println(difference / 1000);
+//        System.out.println(difference / 1000);
         return String.format("%s sek", difference / 1000);
     }
 }

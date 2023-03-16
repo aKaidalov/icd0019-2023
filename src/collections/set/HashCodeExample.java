@@ -14,6 +14,10 @@ public class HashCodeExample {
 
         Set<Point> set = new HashSet<>();
 
+        System.out.println(new Point(1, 1).hashCode());
+        System.out.println(new Point(1, 1).hashCode());
+        System.out.println(new Point(1, 2).hashCode());
+
         set.add(new Point(1, 1));
         set.add(new Point(1, 1));
 
