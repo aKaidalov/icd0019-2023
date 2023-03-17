@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Card implements Comparable<Card> {
 
-    public enum CardValue { S2, S3, S4, S5, S6, S7, S8, S9, S10, J, Q, K, A }
+public enum CardValue { S2, S3, S4, S5, S6, S7, S8, S9, S10, J, Q, K, A}
 
     public enum CardSuit { C, D, H, S }
 
@@ -15,6 +15,11 @@ public class Card implements Comparable<Card> {
         this.value = value;
         this.suit = suit;
     }
+
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(value, suit);
+//    }
 
     @Override
     public boolean equals(Object obj) {
@@ -28,7 +33,7 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card other) {
-        throw new RuntimeException("not implemented yet");
+        return Integer.compare(this.value.ordinal(), other.value.ordinal());
     }
 
     public CardValue getValue() {
