@@ -89,7 +89,7 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
     public List<Integer> containsSameValues(List<Card> list) {
         List<Integer> result = new ArrayList<>();
         int sameCards = 0;
-        int cache = 0;  // if there will be full house, it returns 5 (breaks on pair and adds later 3 = 2 + 3)
+        int cache = 0;  // if there will be a full house, it returns 5 (breaks on pair and adds later 3 [2 + break + 3])
         int wasBreak = 0;
         for (int i = 0; i < list.size() - 1; i++) {
             if (list.get(i).getValue() == list.get(i + 1).getValue()){
