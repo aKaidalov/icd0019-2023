@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Hand implements Iterable<Card>, Comparable<Hand> {
 
-    private final int SAME_SUITS_IN_ANY_FLUSH = 5;
-    private final int NUMBER_OF_VALUES = 5;
+    private static final int SAME_SUITS_IN_ANY_FLUSH = 5;
+    private static final int NUMBER_OF_VALUES = 5;
     private List<Card> cards = new ArrayList<>();
 
     public void addCard(Card card) {
@@ -47,55 +47,32 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
 
     public boolean containsStraightFlush(List<Card> cardsAreSorted) {
         if (containsSameSuits() == SAME_SUITS_IN_ANY_FLUSH) {
-            if (isSequential(cardsAreSorted)) { // need to check if they are in sequential order
-                return true;
-            }
+            return isSequential(cardsAreSorted);
         }
         return false;
     }
     public boolean containsFourOfAKind(int streak) {
-        if (streak == 4) {
-            return true;
-        }
-        return false;
+        return streak == 4;
     }
     public boolean containsFullHouse(int cache, int wereBreaks) {
-        if (cache == 5 && wereBreaks == 1) {
-            return true;
-        }
-        return false;
+        return cache == 5 && wereBreaks == 1;
     }
     public boolean containsFlush() {
-        if (containsSameSuits() == SAME_SUITS_IN_ANY_FLUSH) {
-            return true;
-        }
-        return false;
+        return containsSameSuits() == SAME_SUITS_IN_ANY_FLUSH;
     }
     public boolean containsStraight(List<Card> cardsAreSorted) {
-        if (cardsAreSorted.size() == NUMBER_OF_VALUES
-                && (isSequential(cardsAreSorted) || compareCardsToBabyStraight())) {
-            return true;
-        }
-        return false;
+        return cardsAreSorted.size() == NUMBER_OF_VALUES
+                && (isSequential(cardsAreSorted) || compareCardsToBabyStraight());
     }
 
     public boolean containsTrips(int cache, int wereBreaks) {
-        if (cache == 3 && wereBreaks == 0) {
-            return true;
-        }
-        return false;
+        return cache == 3 && wereBreaks == 0;
     }
     public boolean containsTwoPairs(int cache, int wereBreaks) {
-        if (cache == 4) {
-            return true;
-        }
-        return false;
+        return cache == 4;
     }
     public boolean containsOnePair(int cache, int wereBreaks) {
-        if (cache == 2) {
-            return true;
-        }
-        return false;
+        return cache == 2;
     }
 
 
@@ -171,14 +148,11 @@ public class Hand implements Iterable<Card>, Comparable<Hand> {
     }
 
     public boolean compareCardsToBabyStraight() {
+        List<Card.CardValue> cardValues = copyValues();
         List<Card.CardValue> hardCode = Arrays.asList(Card.CardValue.A, Card.CardValue.S2, Card.CardValue.S3
                 , Card.CardValue.S4, Card.CardValue.S5);
-        List<Card.CardValue> cardValues = copyValues();
 
-        if (compareValues(cardValues, hardCode)) {
-            return true;
-        }
-        return false;
+        return compareValues(cardValues, hardCode);
     }
 
     public boolean compareValues(List<Card.CardValue> cardValues, List<Card.CardValue> hardCode) {
