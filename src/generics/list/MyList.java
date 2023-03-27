@@ -11,8 +11,10 @@ public class MyList<T> {
         elements.add(element);
     }
 
-    public void addAll(List elements) {
-        throw new RuntimeException("not implemented yet");
+    public void addAll(List<? extends T> elements) { // elements can represent a list of elements of type
+        for (T element : elements) {                 // Integer, Double, Float, etc. but not other types.
+            add(element);
+        }
     }
 
     @Override

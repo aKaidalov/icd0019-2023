@@ -16,11 +16,7 @@ public class MinimumExample {
         assertThat(min("b", "a"), is("a"));
     }
 
-    public Integer min(Integer a, Integer b) {
-        return a.compareTo(b) < 0 ? a : b;
-    }
-
-    public String min(String a, String b) {
+    public <T extends Comparable <T>> T min(T a, T b) { // "extends" because not any object is comparable
         return a.compareTo(b) < 0 ? a : b;
     }
 

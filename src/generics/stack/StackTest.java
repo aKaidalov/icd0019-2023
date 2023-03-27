@@ -9,7 +9,7 @@ public class StackTest {
 
     @Test
     public void elementsArePoppedInReverseOrder() {
-        Stack stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
 
         stack.push(1);
         stack.push(2);

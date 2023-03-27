@@ -1,25 +1,25 @@
 package generics.stack;
 
-public class Stack {
+public class Stack<T> {
 
-    private Integer[] elements;
+    private Object[] elements;
     private Integer size = 0;
 
     public Stack() {
-        elements = new Integer[100];
+        elements = new Object[100];
     }
 
-    public void push(Integer element) {
+    public void push(T element) {
         elements[size++] = element;
     }
 
     @SuppressWarnings("unchecked")
-    public Integer pop() {
+    public T pop() {
         if (size == 0) {
             throw new IllegalStateException("stack is empty");
         }
 
-        return elements[--size];
+        return (T) elements[--size];
     }
 
 }

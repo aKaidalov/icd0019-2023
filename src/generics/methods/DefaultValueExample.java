@@ -63,11 +63,15 @@ public class DefaultValueExample {
 
     }
 
-    public Integer defaultIfNull(Integer value, Integer defaultValue) {
-        return value != null ? value : defaultValue;
-    }
+//    public Integer defaultIfNull(Integer value, Integer defaultValue) {
+//        return value != null ? value : defaultValue;
+//    }
+//
+//    public Double defaultIfNull(Double value, Double defaultValue) {
+//        return value != null ? value : defaultValue;
+//    }
 
-    public Double defaultIfNull(Double value, Double defaultValue) {
+    public <T> T defaultIfNull(T value, T defaultValue) {
         return value != null ? value : defaultValue;
     }
 
