@@ -1,32 +1,112 @@
 package generics.cart;
 
-public class ShoppingCart<T> {
 
-    public void add(Object item) {
-        throw new RuntimeException("not implemented yet");
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingCart<T extends CartItem> {
+
+    private ArrayList<CurrentCartItem> cart;
+    private Double total;
+    private Double discount;
+
+    public ShoppingCart() {
+        this.cart = new ArrayList<>();
+        this.total = 0d;
+        this.discount = 0d;
+    }
+
+    public void add(T item) {
+        if (item != null) {
+            if (!FindSameElement(item)){
+                cart.add(new CurrentCartItem(item));
+            }
+        }
+    }
+
+    private boolean FindSameElement(T item) {
+        if (cart.size() != 0) {
+            for (CurrentCartItem currentCartItem : cart) {
+                if (currentCartItem.getCurrentIdentifier().equals(item.getId()) &&
+                        currentCartItem.getCurrentPrice().equals(item.getPrice())) {
+                    currentCartItem.increaseQuantity();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void removeById(String id) {
-        throw new RuntimeException("not implemented yet");
+
+        List<CurrentCartItem> copiedList = new ArrayList<>();
+        copiedList.addAll(cart);
+
+        for (CurrentCartItem currentCartItem : copiedList) {
+            if (currentCartItem.getCurrentIdentifier().equals(id)) {
+                cart.remove(currentCartItem);
+            }
+        }
     }
 
     public Double getTotal() {
-        throw new RuntimeException("not implemented yet");
+        checkIfNeedToCalculate();
+        return total;
+    }
+
+    public void checkIfNeedToCalculate() {
+        if (total == 0d) {
+            calculateTotal();
+        }
+    }
+
+    public void calculateTotal() {
+        for (CurrentCartItem currentCartItem : cart) {
+            total += currentCartItem.getCurrentPrice() * currentCartItem.getCurrentQuantity();
+        }
     }
 
     public void increaseQuantity(String id) {
-        throw new RuntimeException("not implemented yet");
+        for (CurrentCartItem currentCartItem : cart) {
+            if (currentCartItem.getCurrentIdentifier().equals(id)) {
+                currentCartItem.increaseQuantity();
+            }
+        }
     }
 
     public void applyDiscountPercentage(Double discount) {
-        throw new RuntimeException("not implemented yet");
+        checkIfNeedToCalculate();
+        this.discount = discount;
+        total *= (1 - (this.discount / 100.0));
     }
 
     public void removeLastDiscount() {
-        throw new RuntimeException("not implemented yet");
+        checkIfNeedToCalculate();
+        total /= 1 - (this.discount / 100.0);
+        discount = 0d;
     }
 
-    public void addAll(Object items) {
-        throw new RuntimeException("not implemented yet");
+    public void addAll(List<T> items) {
+        for (T item : items) {
+            CurrentCartItem<T> currentItem = new CurrentCartItem<>(item);
+            cart.add(currentItem);
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        boolean isFirst = true;
+
+        for (CurrentCartItem currentCartItem : cart) {
+            if (isFirst) {
+                result.append(currentCartItem.toString());
+                isFirst = false;
+            } else {
+                result.append(", " + currentCartItem.toString());
+            }
+        }
+
+        return result.toString();
     }
 }
