@@ -17,15 +17,13 @@ public class ShoppingCart<T extends CartItem> {
     }
 
     public void add(T item) {
-        if (item != null) {
-            if (!FindSameElement(item)){
-                cart.add(new CurrentCartItem(item));
-            }
+        if (item != null && !hasSameElement(item)) {
+            cart.add(new CurrentCartItem(item));
         }
     }
 
-    private boolean FindSameElement(T item) {
-        if (cart.size() != 0) {
+    private boolean hasSameElement(T item) {
+        if (!cart.isEmpty()) {
             for (CurrentCartItem currentCartItem : cart) {
                 if (currentCartItem.getCurrentIdentifier().equals(item.getId()) &&
                         currentCartItem.getCurrentPrice().equals(item.getPrice())) {
@@ -77,7 +75,7 @@ public class ShoppingCart<T extends CartItem> {
     public void applyDiscountPercentage(Double discount) {
         checkIfNeedToCalculate();
         this.discount = discount;
-        total *= (1 - (this.discount / 100.0));
+        total *= 1 - (this.discount / 100.0);
     }
 
     public void removeLastDiscount() {
