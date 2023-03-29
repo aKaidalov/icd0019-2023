@@ -19,14 +19,24 @@ public class Reduce {
 
         assertThat(reduce(numbers, (a, b) -> a * b), is(24));
 
-//        assertThat(reduce(List.of("1", "2", "3"),
-//                (a, b) -> a + b), is("123"));
+        assertThat(reduce(List.of("1", "2", "3"), (a, b) -> a + b), is("123"));
 
     }
 
-    private Integer reduce(List<Integer> list,
-                        BiFunction<Integer, Integer, Integer> func) {
+    private <T> T reduce(List<T> list,
+                        BiFunction<T, T, T> func) {
 
-        throw new RuntimeException("not implemented yet");
+        if (list.isEmpty()) {
+            throw new IllegalArgumentException("List can't be empty");
+        } else {
+            T result = list.get(0); // get first element for the start point
+
+            for (int i = 0; i < list.size() - 1; i++) {
+                result = func.apply(result, list.get(i + 1)); // apply current result to a new action
+            }
+
+             return result;
+        }
+
     }
 }

@@ -22,6 +22,14 @@ public class WithResource {
     }
 
     private void withResource(Consumer<Resource> consumer) {
-        throw new RuntimeException("not implemented yet");
+        Resource resource = new Resource();
+
+        try {
+            resource.open();
+
+            consumer.accept(resource);
+        } finally {
+            resource.close();
+        }
     }
 }
