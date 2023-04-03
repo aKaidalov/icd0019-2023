@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Numbers {
 
@@ -13,25 +14,40 @@ public class Numbers {
     public void findsOddNumbers() {
 
         List<Integer> oddNumbers = numbers.stream()
-                // add filter here
-                .toList();
+                .filter(x -> x % 2 == 1)
+                .collect(Collectors.toList());
 
         System.out.println(oddNumbers);
     }
 
     @Test
     public void findsOddNumbersOver10() {
+        List<Integer> oddNumbersOver10 = numbers.stream()
+                .filter(x -> x % 2 == 1)
+                .filter(x -> x > 10)
+                .collect(Collectors.toList());
 
+        System.out.println(oddNumbersOver10);
     }
 
     @Test
     public void findsSquaredOddNumbers() {
+        List<Integer> squaredOddNumbers = numbers.stream()
+                .filter(x -> x % 2 == 1)
+                .map(x -> x * x)
+                .collect(Collectors.toList());
 
+        System.out.println(squaredOddNumbers);
     }
 
     @Test
     public void findsSumOfOddNumbers() {
+        Integer sumOfOddNumbers = numbers.stream()
+                .filter(x -> x % 2 == 1)
+                .mapToInt(x -> x)
+                .sum();
 
+        System.out.println(sumOfOddNumbers);
     }
 
 }

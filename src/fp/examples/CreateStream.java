@@ -26,8 +26,6 @@ public class CreateStream {
 
         IntStream s6 = IntStream.range(1, 3);
     }
-
-
 }
 
 
