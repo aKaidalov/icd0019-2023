@@ -49,4 +49,15 @@ public class Entry {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "productId='" + productId + '\'' +
+                ", date=" + date +
+                ", state='" + state + '\'' +
+                ", category='" + category + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }
