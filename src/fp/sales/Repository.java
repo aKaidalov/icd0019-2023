@@ -55,7 +55,7 @@ public class Repository {
                 .skip(1)
                 .peek(System.out::println)
                 .map(Entry::getProductId)
-                .sorted()
+                .sorted() // need to sort by ID. (previously were sorted by amount/sum)
                 .peek(System.out::println)
                 .toList();
 
