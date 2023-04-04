@@ -59,6 +59,9 @@ public class Repository {
                 .peek(System.out::println)
                 .toList();
 
+        System.out.println(check1 + "\n");
+
+
         var check2 = new Repository().getEntries()
                 .stream()
                 .collect(
