@@ -12,7 +12,8 @@ public class Runner {
     }
 
     private Iterable<Integer> range(int start, int end) {
-        return null;
+        return () -> new MyIterator(start, end); // lambda
+//        return new MyIterable(start, end);
     }
 
 

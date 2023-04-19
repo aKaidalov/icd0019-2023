@@ -23,7 +23,7 @@ public final class GoldCustomer extends AbstractCustomer {
 
     @Override
     public String asString() {
-        throw new RuntimeException("not implemented yet");
+        return "GOLD;" + id + ";" + name + ";" + bonusPoints + ";";
     }
 
 }
