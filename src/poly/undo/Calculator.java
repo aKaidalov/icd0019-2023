@@ -12,7 +12,7 @@ public class Calculator {
     public void input(double value) {
         double copy = this.value;
 
-        undos.push(input -> input - copy);
+        undos.push(input -> copy);
 
         this.value = value;
     }
