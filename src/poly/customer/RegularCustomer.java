@@ -17,32 +17,33 @@ public final class RegularCustomer extends AbstractCustomer {
         setLocalDate(lastOrderDate);
     }
 
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(LocalDate localDate) {
-        this.localDate = localDate;
-    }
-
     @Override
     public void collectBonusPointsFrom(Order order) {
-        throw new RuntimeException("not implemented yet");
+
+        Double totalPrice = order.getTotal();
+
+        if (lastOrderIsLessThanAMonthAgo(order) && totalPrice >= MINIMUM_TOTAL_FOR_BONUS_POINTS) {
+            Double calculatedBonusPoints = totalPrice * 1.5;
+            bonusPoints = calculatedBonusPoints.intValue();
+        } else if (totalPrice >= MINIMUM_TOTAL_FOR_BONUS_POINTS) {
+            bonusPoints = totalPrice.intValue();
+        }
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        throw new RuntimeException("not implemented yet");
-    }
-
-    @Override
-    public int hashCode() {
-        throw new RuntimeException("not implemented yet");
+    public boolean lastOrderIsLessThanAMonthAgo(Order order) {
+        return this.getLocalDate().isAfter(order.getDate().minusMonths(1));
     }
 
     @Override
     public String asString() {
         return "REGULAR;" + id + ";" + name + ";" + bonusPoints + ";" + localDate.format(formatter);
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
 }

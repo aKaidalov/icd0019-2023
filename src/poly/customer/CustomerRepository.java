@@ -53,19 +53,24 @@ public class CustomerRepository {
         }
     }
 
-    private void writeToFile () {
+    private void writeToFile(AbstractCustomer customerToAdd) {
+        if (!customers.contains(customerToAdd)) {
+            try {
+                FileWriter output = new FileWriter(FILE_PATH);
 
-        try {
-            FileWriter output = new FileWriter(FILE_PATH);
+                for (AbstractCustomer customer : customers) {
+                    output.write(customer.asString() + "\n");
+                }
 
-            for (AbstractCustomer customer : customers) {
-                output.write(customer.asString() + "\n");
+                if (customerToAdd != null) {
+                    output.write(customerToAdd.asString() + "\n");
+                }
+
+                output.close();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-
-            output.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -79,10 +84,15 @@ public class CustomerRepository {
         customers = customers.stream()
                 .filter(x -> !id.equals(x.getId()))
                 .toList();
+
+        // write to file, because it's the only place that stores all clients
+
+        writeToFile(null); // Write all customers to the file
     }
 
     public void save(AbstractCustomer customer) {
-        customers.add(customer);
+        remove(customer.getId());
+        writeToFile(customer); // Add a new customer to the file
     }
 
     public int getCustomerCount() {

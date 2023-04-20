@@ -5,6 +5,8 @@ import java.util.Objects;
 public abstract sealed class AbstractCustomer
         permits GoldCustomer, RegularCustomer {
 
+    protected static final Integer MINIMUM_TOTAL_FOR_BONUS_POINTS = 100;
+
     protected String id;
     protected String name;
     protected int bonusPoints;

@@ -8,17 +8,13 @@ public final class GoldCustomer extends AbstractCustomer {
 
     @Override
     public void collectBonusPointsFrom(Order order) {
-        throw new RuntimeException("not implemented yet");
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        throw new RuntimeException("not implemented yet");
-    }
+        Double totalPrice = order.getTotal();
 
-    @Override
-    public int hashCode() {
-        throw new RuntimeException("not implemented yet");
+        if (totalPrice >= MINIMUM_TOTAL_FOR_BONUS_POINTS) {
+            Double calculatedBonusPoints = totalPrice * 1.5;
+            bonusPoints = calculatedBonusPoints.intValue();
+        }
     }
 
     @Override
